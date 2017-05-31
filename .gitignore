@@ -64,3 +64,12 @@ fabric.properties
 .idea/sonarlint
 
 # End of https://www.gitignore.io/api/phpstorm
+*.iml
+GiThub/.idea/modules.xml
+*.xml
+GiThub/.idea/php.xml
+*.xml
+GiThub/.idea/php.xml
+*.xml
+*.xml
+GiThub/.idea/php.xml
