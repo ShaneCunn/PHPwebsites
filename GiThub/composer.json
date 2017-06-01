@@ -12,6 +12,6 @@
   "require": {
     "twbs/bootstrap": "v3.3.7",
     "twig/twig": "1.6.5",
-    "milo/github-api": "v1.4.4"
+    "milo/github-api": "^1.4"
   }
 }

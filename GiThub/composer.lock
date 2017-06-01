@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "05826e03ffacdab466a7bd48043bf899",
+    "content-hash": "6b3e72f9d78c5781ca54d1b6b220be93",
     "packages": [
         {
             "name": "milo/github-api",
