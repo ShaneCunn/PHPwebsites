@@ -6,12 +6,13 @@
  * Time: 11:36
  */
 
-$city = "galway";
-//$country = $_GET['country'];
+//$city = "galway";
+$city = $_GET['city'];
 $country = "ireland";
 
 $appID = "&appid=775158c1c823e0fc9aa77299bc16461c";
-$api_url = "http://api.openweathermap.org/data/2.5/weather?q=" . $city . "," . $country . $appID;
+//$api_url = "http://api.openweathermap.org/data/2.5/weather?q=" . $city . "," . $country . $appID;
+$api_url = "http://api.openweathermap.org/data/2.5/weather?q=" . $city . $appID;
 $username = 'mikethefrog';
 $url = 'https://api.github.com/users/treehouse';
 $process = curl_init($api_url);
@@ -23,15 +24,27 @@ $results = json_decode($return);
 
 $temperature = $results->main->temp - 273.15;
 //$city =  $results->main->id->name;
-
+// getting data from php object
 $condition = $results->weather[0]->description;
 $humidity = $results->main->humidity . "%";
 $wind = $results->wind->speed * 3.6;
 $direction = $results->wind->deg;
+$city1 = $results->name;
+
+
+// getting data from associative array
 $results2 = json_decode($return, true);
-var_dump($results2);
+//var_dump($results2); // dump out to screen for debugging the array and object positions
 
+$city2 = $_GET['city'];
+//$city2 = "galway";
+$temperature2 = $results2[main][temp] - 273.15;
 
+// getting data from php object
+$condition2 = $results2[weather][0][description];
+$humidity2 = $results2[main][humidity] . "%";
+$wind2 = round(($results2[wind][speed] * 3.6), 0); // round the number
+$direction2 = $results2[wind][deg];
 //
 //echo "<Strong>City: </Strong>" . $city . "<br />";
 //
@@ -40,7 +53,29 @@ var_dump($results2);
 //echo "<Strong>Temperature:</Strong> " . $temperature . " &#8451;<br />";
 //echo "<Strong>Humidity:</Strong> " . $humidity . "<br />";
 //echo "<Strong>Wind Speed:</Strong> " . $wind . " KPH<br />";
-//echo "<Strong>Wind Direction:</Strong> " . $direction . "&deg;<br />";
+//echo "<Strong>Wind Direction:</Strong> " . $direction2 . "&deg;<br />";
+
+$bearing = $direction;
+
+$cardinalDirections = array(
+    'North' => array(337.5, 22.5),
+    'North East' => array(22.5, 67.5),
+    'East' => array(67.5, 112.5),
+    'South East' => array(112.5, 157.5),
+    'South' => array(157.5, 202.5),
+    'South West' => array(202.5, 247.5),
+    'West' => array(247.5, 292.5),
+    'North West' => array(292.5, 337.5)
+);
+
+foreach ($cardinalDirections as $dir => $angles) { // convert degrees into wind direction
+    if ($bearing >= $angles[0] && $bearing < $angles[1]) {
+        $direction = $dir;
+        break;
+    }
+}
+
+echo $direction;
 curl_close($process);
 
 ?>
@@ -92,7 +127,7 @@ curl_close($process);
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Start Bootstrap</a>
+            <a class="navbar-brand" href="#">Simple Weather app</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -116,30 +151,54 @@ curl_close($process);
 <!-- Page Content -->
 <div class="container">
 
+    <h1>What's the Weather?</h1>
+
+    <form>
+        <div class="form-group">
+            <label for="city">Enter the name of a city.</label>
+            <input type="text" class="form-control" id="city" name="city" aria-describedby="city"
+                   placeholder="E.g. New York, Tokyo" value="<?php echo $_GET['city']; ?>">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+    </form></div>
+<div class="container">
+
+
+
     <div class="row">
 
         <div class="col-lg-12 text-center">
             <h1>Weather</h1>
-            <p><?php echo "<Strong>City: </Strong>" . $city . "<br />";
-
+            <p><?php
+                echo "<Strong>City: </Strong>" . $city1 . "<br />";
                 echo "<Strong>Condition are:</Strong> " . $condition . "<br />";
-
                 echo "<Strong>Temperature:</Strong> " . $temperature . " &#8451;<br />";
                 echo "<Strong>Humidity:</Strong> " . $humidity . "<br />";
                 echo "<Strong>Wind Speed:</Strong> " . $wind . " KPH<br />";
-                echo "<Strong>Wind Direction:</Strong> " . $direction . "&deg;<br />";
+                echo "<Strong>Wind Direction:</Strong> " . $direction . "<br />";
 
 
                 ?></p>
-            </ul>
-        </div>
-        <div class="col-lg-12 text-center">
-            <h1>Weather2</h1>
 
-<!--            --><?php //foreach($results2 as $x => $x_value) {
-//                echo "<p>Key=" . $x . ", Value=" . $x_value."</p>";
-//                echo "<br>";
-//            } ?>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1>Weather2</h1>
+
+                <p><?php //foreach($results2 as $x => $x_value) {
+                    //                echo "<p>Key=" . $x . ", Value=" . $x_value."</p>";
+                    //                echo "<br>";
+
+                    echo "<Strong>City: </Strong>" . $city2 . "<br />";
+                    echo "<Strong>Condition are:</Strong> " . $condition2 . "<br />";
+                    echo "<Strong>Temperature:</Strong> " . $temperature2 . " &#8451;<br />";
+                    echo "<Strong>Humidity:</Strong> " . $humidity2 . "<br />";
+                    echo "<Strong>Wind Speed:</Strong> " . $wind2 . " KPH<br />";
+                    echo "<Strong>Wind Direction:</Strong> " . $direction2 . "&deg;<br />";
+                    ?></p>
+            </div>
         </div>
     </div>
     <!-- /.row -->
