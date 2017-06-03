@@ -13,8 +13,7 @@ $country = "ireland";
 $appID = "&appid=775158c1c823e0fc9aa77299bc16461c";
 //$api_url = "http://api.openweathermap.org/data/2.5/weather?q=" . $city . "," . $country . $appID;
 $api_url = "http://api.openweathermap.org/data/2.5/weather?q=" . $city . $appID;
-$username = 'mikethefrog';
-$url = 'https://api.github.com/users/treehouse';
+
 $process = curl_init($api_url);
 curl_setopt($process, CURLOPT_USERAGENT, 1);
 curl_setopt($process, CURLOPT_RETURNTRANSFER, 1);
@@ -75,8 +74,33 @@ foreach ($cardinalDirections as $dir => $angles) { // convert degrees into wind 
     }
 }
 
-echo $direction;
+//echo $direction;
+// Darkskies api feed
+$appDarksky = "2457a1a06421272ba3217d68bf4f47fa";
+$lat = "53.2707";
+$long = "-9.0568";
+//$api_url = "http://api.openweathermap.org/data/2.5/weather?q=" . $city . "," . $country . $appID;
+$api_urlDark = "https://api.darksky.net/forecast/" . $appDarksky . "/" . $lat . "," . $long;
+
+$processDark = curl_init($api_urlDark);
+curl_setopt($processDark, CURLOPT_USERAGENT, 1);
+curl_setopt($processDark, CURLOPT_RETURNTRANSFER, 1);
+$returnDark = curl_exec($processDark);
+$resultsDark = json_decode($returnDark, true);
+var_dump($resultsDark);
 curl_close($process);
+
+$city3 = $_GET['city'];
+//$city2 = "galway";
+$temperature3 = round(($resultsDark[currently][temperature] - 32) / 1.8, 0);
+
+// getting data from php object
+$condition3 = $resultsDark[hourly][summary];
+$humidity3 = ($resultsDark[currently][humidity]) * 100 . "%";
+$wind3 = round(($resultsDark[currently][windSpeed] * 3.6), 0); // round the number
+$direction3 = $resultsDark[currently][windBearing];
+
+curl_close($processDark);
 
 ?>
 
@@ -91,7 +115,7 @@ curl_close($process);
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Bare - Start Bootstrap Template</title>
+    <title>Weather app</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -162,9 +186,9 @@ curl_close($process);
 
         <button type="submit" class="btn btn-primary">Submit</button>
 
-    </form></div>
+    </form>
+</div>
 <div class="container">
-
 
 
     <div class="row">
@@ -197,6 +221,24 @@ curl_close($process);
                     echo "<Strong>Humidity:</Strong> " . $humidity2 . "<br />";
                     echo "<Strong>Wind Speed:</Strong> " . $wind2 . " KPH<br />";
                     echo "<Strong>Wind Direction:</Strong> " . $direction2 . "&deg;<br />";
+                    ?></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1>Weather3 using darksky</h1>
+
+                <p><?php //foreach($results2 as $x => $x_value) {
+                    //                echo "<p>Key=" . $x . ", Value=" . $x_value."</p>";
+                    //                echo "<br>";
+
+                    echo "<Strong>City: </Strong>" . $city3 . "<br />";
+                    echo "<Strong>Condition are:</Strong> " . $condition3 . "<br />";
+                    echo "<Strong>Temperature:</Strong> " . $temperature3 . " &#8451;<br />";
+                    echo "<Strong>Humidity:</Strong> " . $humidity3 . "<br />";
+                    echo "<Strong>Wind Speed:</Strong> " . $wind3 . " KPH<br />";
+                    echo "<Strong>Wind Direction:</Strong> " . $direction3 . "&deg;<br />";
                     ?></p>
             </div>
         </div>
