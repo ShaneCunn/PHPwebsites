@@ -36,7 +36,7 @@ $city1 = $results->name;
 
 // getting data from associative array
 $results2 = json_decode($return, true);
-//var_dump($results2); // dump out to screen for debugging the array and object positions
+var_dump($results2); // dump out to screen for debugging the array and object positions
 
 $city2 = $_GET['city'];
 //$city2 = "galway";
