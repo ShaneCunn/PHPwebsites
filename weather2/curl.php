@@ -102,51 +102,54 @@ $condition3 = $resultsDark[hourly][summary];
 $humidity3 = ($resultsDark[currently][humidity]) * 100 . "%";
 $wind3 = round(($resultsDark[currently][windSpeed] * 3.6), 0); // round the number
 $direction3 = $resultsDark[currently][windBearing];
-$icon = $resultsDark[hourly][icon];
+//$icon = $resultsDark[hourly][icon];
+
+$icon = "clear-day";
+
 curl_close($processDark);
 
 switch ($icon) {
     case "rain":
-        $image = "<img src=\"img/rain-cloud-icon-5.png\" alt=\"Mountain View\"";
+        $image = "<img class=\"img-responsive red\" src=\"img/rain.png\"  alt=\"Mountain View\" style= 'background-color: red' ";
         break;
     case "clear-day":
-        $image = "<img src=\"img/rain-cloud-icon-5.png\" alt=\"Mountain View\"";
+        $image = "<img src=\"img/clear_day.png\" alt=\"Mountain View\" style= 'background-color: red'";
         break;
     case "clear-night":
-        $image = "<img src=\"img/rain-cloud-icon-5.png\" alt=\"Mountain View\"";
+        $image = "<img src=\"img/clear_night.png\" alt=\"Mountain View\" style= 'background-color: red'";
         break;
     case "snow":
-        $image = "<img src=\"img/rain-cloud-icon-5.png\" alt=\"Mountain View\"";
+        $image = "<img src=\"img/snow.png\" alt=\"Mountain View\" style= 'background-color: red'";
         break;
     case "sleet":
-        $image = "<img src=\"img/rain-cloud-icon-5.png\" alt=\"Mountain View\"";
+        $image = "<img src=\"img/sleet.png\" alt=\"Mountain View\" style= 'background-color: red'";
         break;
     case "wind":
-        $image = "<img src=\"img/rain-cloud-icon-5.png\" alt=\"Mountain View\"";
+        $image = "<img src=\"img/wind.png\" alt=\"Mountain View\" style= 'background-color: red'";
         break;
     case "cloudy":
-        $image = "<img src=\"img/rain-cloud-icon-5.png\" alt=\"Mountain View\"";
+        $image = "<img src=\"img/cloudy.png\" alt=\"Mountain View\" style= 'background-color: red'";
         break;
-    case "rain":
-        $image = "<img src=\"img/rain-cloud-icon-5.png\" alt=\"Mountain View\"";
+    case "hail":
+        $image = "<img src=\"img/hail.png\" alt=\"Mountain View\" style= 'background-color: red'";
         break;
     case "partly-cloudy-day":
-        $image = "<img src=\"img/rain-cloud-icon-5.png\" alt=\"Mountain View\"";
+        $image = "<img src=\"img/partly_cloudly.png\" alt=\"Mountain View\" style= 'background-color: red'";
         break;
     case "partly-cloudy-night":
-        $image = "<img src=\"img/rain-cloud-icon-5.png\" alt=\"Mountain View\"";
+        $image = "<img src=\"img/partly_cloudly.png\" alt=\"Mountain View\" style= 'background-color: red'";
         break;
-    case "partly-cloudy-day":
-        $image = "<img src=\"img/rain-cloud-icon-5.png\" alt=\"Mountain View\"";
+    case "thunderstorm":
+        $image = "<img src=\"img/rain-cloud-icon-5.png\" alt=\"Mountain View\" style= 'background-color: red'";
         break;
-    case "partly-cloudy-day":
-        $image = "<img src=\"img/rain-cloud-icon-5.png\" alt=\"Mountain View\"";
+    case "tornado":
+        $image = "<img src=\"img/rain-cloud-icon-5.png\" alt=\"Mountain View\" style= 'background-color: red'";
         break;
-    case "partly-cloudy-day":
-        $image = "<img src=\"img/rain-cloud-icon-5.png\" alt=\"Mountain View\"";
+    case "sunny":
+        $image = "<img src=\"img/sunny.png\" alt=\"Mountain View\" style= 'background-color: red'";
         break;
     default:
-        echo "Your favorite color is neither red, blue, nor green!";
+        $image = "<img src=\"img/sunny.png\" alt=\"Mountain View\" style= 'background-color: red'";;
 }
 //clear-day, clear-night, rain, snow, sleet, wind, fog, cloudy, partly-cloudy-day, or partly-cloudy-night.  hail, thunderstorm, tornado,
 
@@ -174,6 +177,14 @@ switch ($icon) {
         body {
             padding-top: 70px;
             /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+        }
+
+       weather {
+
+           color:#ccc !important;
+        }
+        red{
+            background-color:#f00;
         }
     </style>
 
@@ -289,11 +300,17 @@ switch ($icon) {
                     echo "<Strong>Wind Speed:</Strong> " . $wind3 . " KPH<br />";
                     echo "<Strong>Wind Direction:</Strong> " . $direction3 . "&deg;<br />";
                     echo "<Strong>icon: </Strong> " . $icon . "<br />";
-                    echo "$image";
+
+
                     ?></p>
+
+
             </div>
         </div>
     </div>
+<red>
+    <?php echo "<weather>" . $image . "</div>"; ?>
+</red>
     <!-- /.row -->
 
 </div>
