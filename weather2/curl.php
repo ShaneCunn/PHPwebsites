@@ -6,6 +6,9 @@
  * Time: 11:36
  */
 
+$favcolor = "red";
+
+
 //$city = "galway";
 $city = $_GET['city'];
 $country = "ireland";
@@ -66,7 +69,7 @@ $cardinalDirections = array(
     'West' => array(247.5, 292.5),
     'North West' => array(292.5, 337.5)
 );
-
+// for statement to convert degree to wind direction eg west
 foreach ($cardinalDirections as $dir => $angles) { // convert degrees into wind direction
     if ($bearing >= $angles[0] && $bearing < $angles[1]) {
         $direction = $dir;
@@ -87,7 +90,7 @@ curl_setopt($processDark, CURLOPT_USERAGENT, 1);
 curl_setopt($processDark, CURLOPT_RETURNTRANSFER, 1);
 $returnDark = curl_exec($processDark);
 $resultsDark = json_decode($returnDark, true);
-var_dump($resultsDark);
+//var_dump($resultsDark);
 curl_close($process);
 
 $city3 = $_GET['city'];
@@ -99,8 +102,54 @@ $condition3 = $resultsDark[hourly][summary];
 $humidity3 = ($resultsDark[currently][humidity]) * 100 . "%";
 $wind3 = round(($resultsDark[currently][windSpeed] * 3.6), 0); // round the number
 $direction3 = $resultsDark[currently][windBearing];
-
+$icon = $resultsDark[hourly][icon];
 curl_close($processDark);
+
+switch ($icon) {
+    case "rain":
+        $image = "<img src=\"img/rain-cloud-icon-5.png\" alt=\"Mountain View\"";
+        break;
+    case "clear-day":
+        $image = "<img src=\"img/rain-cloud-icon-5.png\" alt=\"Mountain View\"";
+        break;
+    case "clear-night":
+        $image = "<img src=\"img/rain-cloud-icon-5.png\" alt=\"Mountain View\"";
+        break;
+    case "snow":
+        $image = "<img src=\"img/rain-cloud-icon-5.png\" alt=\"Mountain View\"";
+        break;
+    case "sleet":
+        $image = "<img src=\"img/rain-cloud-icon-5.png\" alt=\"Mountain View\"";
+        break;
+    case "wind":
+        $image = "<img src=\"img/rain-cloud-icon-5.png\" alt=\"Mountain View\"";
+        break;
+    case "cloudy":
+        $image = "<img src=\"img/rain-cloud-icon-5.png\" alt=\"Mountain View\"";
+        break;
+    case "rain":
+        $image = "<img src=\"img/rain-cloud-icon-5.png\" alt=\"Mountain View\"";
+        break;
+    case "partly-cloudy-day":
+        $image = "<img src=\"img/rain-cloud-icon-5.png\" alt=\"Mountain View\"";
+        break;
+    case "partly-cloudy-night":
+        $image = "<img src=\"img/rain-cloud-icon-5.png\" alt=\"Mountain View\"";
+        break;
+    case "partly-cloudy-day":
+        $image = "<img src=\"img/rain-cloud-icon-5.png\" alt=\"Mountain View\"";
+        break;
+    case "partly-cloudy-day":
+        $image = "<img src=\"img/rain-cloud-icon-5.png\" alt=\"Mountain View\"";
+        break;
+    case "partly-cloudy-day":
+        $image = "<img src=\"img/rain-cloud-icon-5.png\" alt=\"Mountain View\"";
+        break;
+    default:
+        echo "Your favorite color is neither red, blue, nor green!";
+}
+//clear-day, clear-night, rain, snow, sleet, wind, fog, cloudy, partly-cloudy-day, or partly-cloudy-night.  hail, thunderstorm, tornado,
+
 
 ?>
 
@@ -239,6 +288,8 @@ curl_close($processDark);
                     echo "<Strong>Humidity:</Strong> " . $humidity3 . "<br />";
                     echo "<Strong>Wind Speed:</Strong> " . $wind3 . " KPH<br />";
                     echo "<Strong>Wind Direction:</Strong> " . $direction3 . "&deg;<br />";
+                    echo "<Strong>icon: </Strong> " . $icon . "<br />";
+                    echo "$image";
                     ?></p>
             </div>
         </div>
