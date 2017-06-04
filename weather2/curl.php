@@ -59,23 +59,33 @@ $direction2 = $results2[wind][deg];
 
 $bearing = $direction;
 
-$cardinalDirections = array(
-    'North' => array(337.5, 22.5),
-    'North East' => array(22.5, 67.5),
-    'East' => array(67.5, 112.5),
-    'South East' => array(112.5, 157.5),
-    'South' => array(157.5, 202.5),
-    'South West' => array(202.5, 247.5),
-    'West' => array(247.5, 292.5),
-    'North West' => array(292.5, 337.5)
-);
+/**
+ * @param $bearing
+ * @return int|string
+ */
+function degreeToString($bearing)
+{
+    $cardinalDirections = array(
+        'North' => array(337.5, 22.5),
+        'North East' => array(22.5, 67.5),
+        'East' => array(67.5, 112.5),
+        'South East' => array(112.5, 157.5),
+        'South' => array(157.5, 202.5),
+        'South West' => array(202.5, 247.5),
+        'West' => array(247.5, 292.5),
+        'North West' => array(292.5, 337.5)
+    );
 // for statement to convert degree to wind direction eg west
-foreach ($cardinalDirections as $dir => $angles) { // convert degrees into wind direction
-    if ($bearing >= $angles[0] && $bearing < $angles[1]) {
-        $direction = $dir;
-        break;
+    foreach ($cardinalDirections as $dir => $angles) { // convert degrees into wind direction
+        if ($bearing >= $angles[0] && $bearing < $angles[1]) {
+            $direction = $dir;
+            break;
+        }
     }
+    return $direction;
 }
+
+$direction = degreeToString($bearing);
 
 //echo $direction;
 // Darkskies api feed
@@ -108,50 +118,60 @@ $icon = "clear-day";
 
 curl_close($processDark);
 
-switch ($icon) {
-    case "rain":
-        $image = "<img class=\"img-responsive red\" src=\"img/rain.png\"  alt=\"Mountain View\" style= 'background-color: red' ";
-        break;
-    case "clear-day":
-        $image = "<img src=\"img/clear_day.png\" alt=\"Mountain View\" style= 'background-color: red'";
-        break;
-    case "clear-night":
-        $image = "<img src=\"img/clear_night.png\" alt=\"Mountain View\" style= 'background-color: red'";
-        break;
-    case "snow":
-        $image = "<img src=\"img/snow.png\" alt=\"Mountain View\" style= 'background-color: red'";
-        break;
-    case "sleet":
-        $image = "<img src=\"img/sleet.png\" alt=\"Mountain View\" style= 'background-color: red'";
-        break;
-    case "wind":
-        $image = "<img src=\"img/wind.png\" alt=\"Mountain View\" style= 'background-color: red'";
-        break;
-    case "cloudy":
-        $image = "<img src=\"img/cloudy.png\" alt=\"Mountain View\" style= 'background-color: red'";
-        break;
-    case "hail":
-        $image = "<img src=\"img/hail.png\" alt=\"Mountain View\" style= 'background-color: red'";
-        break;
-    case "partly-cloudy-day":
-        $image = "<img src=\"img/partly_cloudly.png\" alt=\"Mountain View\" style= 'background-color: red'";
-        break;
-    case "partly-cloudy-night":
-        $image = "<img src=\"img/partly_cloudly.png\" alt=\"Mountain View\" style= 'background-color: red'";
-        break;
-    case "thunderstorm":
-        $image = "<img src=\"img/rain-cloud-icon-5.png\" alt=\"Mountain View\" style= 'background-color: red'";
-        break;
-    case "tornado":
-        $image = "<img src=\"img/rain-cloud-icon-5.png\" alt=\"Mountain View\" style= 'background-color: red'";
-        break;
-    case "sunny":
-        $image = "<img src=\"img/sunny.png\" alt=\"Mountain View\" style= 'background-color: red'";
-        break;
-    default:
-        $image = "<img src=\"img/sunny.png\" alt=\"Mountain View\" style= 'background-color: red'";;
-}
+/**
+ * @param $icon
+ * @return string
+ */
+function imageIcon($icon): string
+{
+    switch ($icon) {
+        case "rain":
+            $image = "<img class=\"img-responsive red\" src=\"img/rain.png\"  alt=\"Mountain View\" style= 'background-color: red' ";
+            break;
+        case "clear-day":
+            $image = "<img src=\"img/clear_day.png\" alt=\"Mountain View\" style= 'background-color: red'";
+            break;
+        case "clear-night":
+            $image = "<img src=\"img/clear_night.png\" alt=\"Mountain View\" style= 'background-color: red'";
+            break;
+        case "snow":
+            $image = "<img src=\"img/snow.png\" alt=\"Mountain View\" style= 'background-color: red'";
+            break;
+        case "sleet":
+            $image = "<img src=\"img/sleet.png\" alt=\"Mountain View\" style= 'background-color: red'";
+            break;
+        case "wind":
+            $image = "<img src=\"img/wind.png\" alt=\"Mountain View\" style= 'background-color: red'";
+            break;
+        case "cloudy":
+            $image = "<img src=\"img/cloudy.png\" alt=\"Mountain View\" style= 'background-color: red'";
+            break;
+        case "hail":
+            $image = "<img src=\"img/hail.png\" alt=\"Mountain View\" style= 'background-color: red'";
+            break;
+        case "partly-cloudy-day":
+            $image = "<img src=\"img/partly_cloudly.png\" alt=\"Mountain View\" style= 'background-color: red'";
+            break;
+        case "partly-cloudy-night":
+            $image = "<img src=\"img/partly_cloudly.png\" alt=\"Mountain View\" style= 'background-color: red'";
+            break;
+        case "thunderstorm":
+            $image = "<img src=\"img/rain-cloud-icon-5.png\" alt=\"Mountain View\" style= 'background-color: red'";
+            break;
+        case "tornado":
+            $image = "<img src=\"img/rain-cloud-icon-5.png\" alt=\"Mountain View\" style= 'background-color: red'";
+            break;
+        case "sunny":
+            $image = "<img src=\"img/sunny.png\" alt=\"Mountain View\" style= 'background-color: red'";
+            break;
+        default:
+            $image = "<img src=\"img/sunny.png\" alt=\"Mountain View\" style= 'background-color: red'";;
+    }
+    return $image;
 //clear-day, clear-night, rain, snow, sleet, wind, fog, cloudy, partly-cloudy-day, or partly-cloudy-night.  hail, thunderstorm, tornado,
+}
+
+$image = imageIcon($icon);
 
 
 ?>
@@ -179,12 +199,13 @@ switch ($icon) {
             /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
         }
 
-       weather {
+        weather {
 
-           color:#ccc !important;
+            color: #ccc !important;
         }
-        red{
-            background-color:#f00;
+
+        red {
+            background-color: #f00;
         }
     </style>
 
@@ -308,9 +329,9 @@ switch ($icon) {
             </div>
         </div>
     </div>
-<red>
-    <?php echo "<weather>" . $image . "</div>"; ?>
-</red>
+    <red>
+        <?php echo "<weather>" . $image . "</div>"; ?>
+    </red>
     <!-- /.row -->
 
 </div>
