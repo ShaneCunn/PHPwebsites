@@ -22,7 +22,7 @@ curl_setopt($process, CURLOPT_USERAGENT, 1);
 curl_setopt($process, CURLOPT_RETURNTRANSFER, 1);
 $return = curl_exec($process);
 $results = json_decode($return);
-//var_dump($results);
+// var_dump($results);
 
 $temperature = $results->main->temp - 273.15;
 //$city =  $results->main->id->name;
@@ -36,8 +36,11 @@ $city1 = $results->name;
 
 // getting data from associative array
 $results2 = json_decode($return, true);
-var_dump($results2); // dump out to screen for debugging the array and object positions
-
+//var_dump($results2); // dump out to screen for debugging the array and object positions
+// $lat =  $results[lat;
+ //$long = $results[lon];
+//$lat = "53.2707";
+//$long = "-9.0568";
 $city2 = $_GET['city'];
 //$city2 = "galway";
 $temperature2 = $results2[main][temp] - 273.15;
@@ -47,6 +50,9 @@ $condition2 = $results2[weather][0][description];
 $humidity2 = $results2[main][humidity] . "%";
 $wind2 = round(($results2[wind][speed] * 3.6), 0); // round the number
 $direction2 = $results2[wind][deg];
+$lat =  $results2[coord][lat]; // get the lat and long for the darksky api
+$long = $results2[coord][lon];
+
 //
 //echo "<Strong>City: </Strong>" . $city . "<br />";
 //
@@ -90,8 +96,8 @@ $direction = degreeToString($bearing);
 //echo $direction;
 // Darkskies api feed
 $appDarksky = "2457a1a06421272ba3217d68bf4f47fa";
-$lat = "53.2707";
-$long = "-9.0568";
+//$lat = "53.2707";
+//$long = "-9.0568";
 //$api_url = "http://api.openweathermap.org/data/2.5/weather?q=" . $city . "," . $country . $appID;
 $api_urlDark = "https://api.darksky.net/forecast/" . $appDarksky . "/" . $lat . "," . $long;
 
@@ -150,10 +156,10 @@ function imageIcon($icon): string
             $image = "<img class=\"img-responsive \"  src=\"img/hail.png\" alt=\"Mountain View\" style= 'background-color: red'";
             break;
         case "partly-cloudy-day":
-            $image = "<img class=\"img-responsive \"  src=\"img/partly_cloudly.png\" alt=\"Mountain View\" style= 'background-color: red'";
+            $image = "<img class=\"img-responsive \"  src=\"img/partly_cloudy.png\" alt=\"Mountain View\" style= 'background-color: red'";
             break;
         case "partly-cloudy-night":
-            $image = "<img class=\"img-responsive \"  src=\"img/partly_cloudly.png\" alt=\"Mountain View\" style= 'background-color: red'";
+            $image = "<img class=\"img-responsive \"  src=\"img/partly_cloudy.png\" alt=\"Mountain View\" style= 'background-color: red'";
             break;
         case "thunderstorm":
             $image = "<img class=\"img-responsive \"  src=\"img/rain-cloud-icon-5.png\" alt=\"Mountain View\" style= 'background-color: red'";
@@ -172,7 +178,7 @@ function imageIcon($icon): string
 }
 
 $image = imageIcon($icon);
-
+//echo "</br>lat: ".$lat. " lon: ". $long;
 
 ?>
 
@@ -321,7 +327,7 @@ $image = imageIcon($icon);
                     echo "<Strong>Wind Speed:</Strong> " . $wind3 . " KPH<br />";
                     echo "<Strong>Wind Direction:</Strong> " . $direction3 . "&deg;<br />";
                     echo "<Strong>icon: </Strong> " . $icon . "<br />";
-                    echo "<Strong> Weather icon" . $image . "</Strong>";
+                    echo "<Strong> Weather icon:" . $image . "</Strong>";
 
                     ?></p>
 
