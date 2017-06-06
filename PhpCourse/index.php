@@ -6,7 +6,7 @@
  * Time: 12:39
  *
  * Front Controller
- * 
+ *
  */
-
-echo "hello shane";
+echo "Requested URL= ". $_SERVER['QUERY_STRING'];
+//echo "hello shane";
