@@ -8,8 +8,31 @@
 
 $favcolor = "red";
 
+// Location section
+$ip = $_SERVER['HTTP_CLIENT_IP'] ? $_SERVER['HTTP_CLIENT_IP'] : ($_SERVER['HTTP_X_FORWARDE‌​D_FOR'] ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']);
+//$icon = "clear-day";
+//echo $ip;
+$IPLoc = $ip;
+//$api_url = "http://api.openweathermap.org/data/2.5/weather?q=" . $city . "," . $country . $appID;
+$api_url_Loc = "https://ipapi.co/$IPLoc/json/";
 
-$city = "galway";
+
+$processLoc = curl_init($api_url_Loc);
+curl_setopt($processLoc, CURLOPT_USERAGENT, 1);
+curl_setopt($processLoc, CURLOPT_RETURNTRANSFER, 1);
+$returnLoc = curl_exec($processLoc);
+$resultLoc = json_decode($returnLoc, true);
+
+
+//$returnDark = curl_exec($processDark);
+//$resultsDark = json_decode($returnDark, true);
+//var_dump($resultLoc);
+$city = $resultLoc[city];
+echo "City is : " . $city4;
+curl_close($processLoc);
+
+
+//$city = "BRASÍLIA";
 //$city = $_GET['city'];
 $country = "ireland";
 
@@ -110,22 +133,20 @@ $resultsDark = json_decode($returnDark, true);
 curl_close($process);
 
 //$city3 = $_GET['city'];
-$city3 = "galway";
+$city3 = $city;
 $temperature3 = round(($resultsDark[currently][temperature] - 32) / 1.8, 0);
 
 // getting data from php object
 $condition3 = $resultsDark[hourly][summary];
 $humidity3 = ($resultsDark[currently][humidity]) * 100 . "%";
 //$wind3 = round(($resultsDark[currently][windSpeed] * 3.6), 0); // round the number
-$wind3 = round(($resultsDark[currently][windSpeed])* 0.44704, 1); // round the number
+$wind3 = round(($resultsDark[currently][windSpeed]) * 0.44704, 1); // round the number
 
 $direction3 = $resultsDark[currently][windBearing];
 $icon = $resultsDark[hourly][icon];
 $daily = "test output";
 $daily = $resultsDark[daily][summary];
 
-
-//$icon = "clear-day";
 
 curl_close($processDark);
 
@@ -136,59 +157,59 @@ curl_close($processDark);
 function imageIcon($icon): string
 {
     $first = "<img src=\"img/svg/";
-    $second = "alt=\"Mountain view\"/>";
+    $second = "Width=\"100px\"//>";
     switch ($icon) {
         case "rain":
-            $image = $first . "rainy-6.svg\".$second";
+            $image = "rainy-6.svg";
             break;
         case "clear-day":
-            $image = $first . 'day.svg"' . $second;
+            $image = 'day.svg';
             break;
         case "clear-night":
-            $image = "<img class=\"img-responsive \"  src=\"img/clear_night.png\" alt=\"Mountain View\" ";
+            $image = "clear_night,svg";
             break;
         case "snow":
-            $image = "<img class=\"img-responsive \"  src=\"img/svg/snow-1.svg\" alt=\"Mountain View\" ";
+            $image = "snow-1.svg";
             break;
         case "sleet":
-            $image = "<img class=\"img-responsive \"  src=\"img/sleet.png\" alt=\"Mountain View\" ";
+            $image = "sleet.png";
             break;
         case "wind":
-            $image = "<img class=\"img-responsive \"  src=\"img/wind.png\" alt=\"Mountain View\" ";
+            $image = "wind.png";
             break;
         case "cloudy":
-            $image = "<img class=\"img-responsive \"  src=\"img/cloudy.png\" alt=\"Mountain View\" ";
+            $image = "cloudy.png";
             break;
         case "hail":
-            $image = "<img class=\"img-responsive \"  src=\"img/hail.png\" alt=\"Mountain View\" ";
+            $image = "hail.png";
             break;
         case "partly-cloudy-day":
-            $image = $first . 'cloudy-day-3.svg"' . $second;
-           break;
+            $image = 'cloudy-day-3.svg"';
+            break;
         case "partly-cloudy-night":
-            $image = "<img src=\"img/svg/cloudy-night-1.svg\" alt=\"Mountain View\" ";
+            $image = "cloudy-night-1.svg";
             break;
         case "thunderstorm":
-            $image = "<img class=\"img-responsive \"  src=\"img/rain-cloud-icon-5.png\" alt=\"Mountain View\" ";
+            $image = "thunder.svg";
             break;
         case "tornado":
-            $image = "<img class=\"img-responsive \"  src=\"img/rain-cloud-icon-5.png\" alt=\"Mountain View\" ";
+            $image = "rain-cloud-icon-5.png";
             break;
         case "sunny":
-            $image = "<img class=\"img-responsive \"  src=\"img/svg/day.svg\" alt=\"Mountain View\" ";
+            $image = "day.svg";
             break;
         default:
-            $image = "<img class=\"img-responsive \"  src=\"img/sunny.png\" alt=\"Mountain View\" ";;
+            $image = "weather.svg";
     }
     return $image;
 //clear-day, clear-night, rain, snow, sleet, wind, fog, cloudy, partly-cloudy-day, or partly-cloudy-night.  hail, thunderstorm, tornado,
 }
 
 $image = imageIcon($icon);
-echo "</br>lat: ".$lat. " lon: ". $long;
+echo "</br>lat: " . $lat . " lon: " . $long;
 //require 'curl.view.php';
 //require 'weatherapp.php';
-require  'wea3.php';
+require 'wea3.php';
 
 
 

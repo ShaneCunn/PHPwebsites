@@ -116,7 +116,8 @@
                 <p style="font-size:50px" id="temperature"><? echo $temperature ?> °C</p>
             </h3>
             <h3 class="text-center">
-                <? echo $image; ?>
+
+                <img src="img/svg/<? echo $image; ?>"  width="100px">
             </h3>
             <div class="row">
                 <div class="col-md-6">
