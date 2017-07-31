@@ -30,15 +30,17 @@
 <link href="css/weather-icons.min.css" rel="stylesheet">
 <link href="css/weather-icons-wind.min.css" rel="stylesheet">
 <link href="css/main.css" rel="stylesheet">
-<title>Weather App by Krishna Diamesso</title>
+<title>Weather App by Shane Cunningham</title>
 
 </head>
 <body class="w3-orange">
 <div ng-app="weatherApp" ng-controller="weatherCtrl" ng-cloak>
 <br>
 <div class="w3-container  w3-center w3-padding">
-<p class="w3-xxlarge">{{cityName | uppercase}}</p>
-<p style="font-size:60px" id="temperature">{{temperatureC | number: 0}} {{celsius}}</p>
+<p class="w3-xxlarge">Galway</p>
+    <p style="font-size:60px" id="temperature"><?php
+
+        echo "<Strong>Temperature:</Strong> " . $temperature . " &#8451;<br />"; ?></p>
 
 <i class="wi {{iconGif}}"></i>
 <p class="capitalize">{{weatherDesc}}</p>
@@ -95,18 +97,18 @@
 <link href="css/weather-icons.min.css" rel="stylesheet">
 <link href="css/weather-icons-wind.min.css" rel="stylesheet">
 <link href="css/main.css" rel="stylesheet">
-<title>Weather App by Krishna Diamesso</title>
+<title>Weather App by Shae Cunningham</title>
 
 </head>
 <body class="w3-orange">
 <div ng-app="weatherApp" ng-controller="weatherCtrl" ng-cloak>
 <br>
 <div class="w3-container  w3-center w3-padding">
-<p class="w3-xxlarge">{{cityName | uppercase}}</p>
-<p style="font-size:60px" id="temperature">{{temperatureC | number: 0}} {{celsius}}</p>
+<p class="w3-xxlarge">Gawlay</p>
+<p style="font-size:60px" id="temperature">200</p>
 
 <i class="wi {{iconGif}}"></i>
-<p class="capitalize">{{weatherDesc}}</p>
+<p class="capitalize">TEst weather</p>
 
 
 <p id="info">Your Weather Information will load shortly after you have approved the geolocation on your browser.</p>
@@ -133,6 +135,20 @@
 <br>
 </div>
 </div>
-<script src="js/app.js"></script>
+
+<form>
+    <div class="form-group">
+        <label for="city">Enter the name of a city.</label>
+        <input type="text" class="form-control" id="city" name="city" aria-describedby="city"
+               placeholder="E.g. New York, Tokyo" value="<?php echo $_GET['city']; ?>">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+</form>
+<?php
+echo "<Strong>City: </Strong>" . ucfirst($city3) . "<br />";
+?>
+<!--<script src="js/app.js"></script>-->
 </body>
 </html>

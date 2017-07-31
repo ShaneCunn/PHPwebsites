@@ -14,26 +14,8 @@
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom CSS -->
-    <style>
-        body {
-            padding-top: 70px;
-            /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-            background: linear-gradient(45deg, #02A3BF 0%, #38F8FF 100%);
-        }
-
-        weather {
-
-            color: #ccc !important;
-        }
-
-        red {
-            background-color: #f00;
-        }
-
-
-    </style>
-
+    
+    <link rel="stylesheet" href="css/weather.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -108,8 +90,6 @@
                 echo "<Strong>Humidity:</Strong> " . $humidity . "<br />";
                 echo "<Strong>Wind Speed:</Strong> " . $wind . " KPH<br />";
                 echo "<Strong>Wind Direction:</Strong> " . $direction . "<br />";
-
-
                 ?></p>
 
         </div>
@@ -146,7 +126,9 @@
                     echo "<Strong>Wind Speed:</Strong> " . $wind3 . " KPH<br />";
                     echo "<Strong>Wind Direction:</Strong> " . $direction3 . "&deg;<br />";
                     echo "<Strong>icon: </Strong> " . $icon . "<br />";
+                    echo "<br><Strong> Daily Weather2: </Strong>" . $daily . "<br />";
                     echo "<Strong> Weather icon:" . $image . "</Strong>";
+
 
                     ?></p>
 
@@ -159,6 +141,8 @@
 
 </div>
 <!-- /.container -->
+
+
 
 <!-- jQuery Version 1.11.1 -->
 <script src="js/jquery.js"></script>

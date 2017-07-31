@@ -9,8 +9,8 @@
 $favcolor = "red";
 
 
-//$city = "galway";
-$city = $_GET['city'];
+$city = "galway";
+//$city = $_GET['city'];
 $country = "ireland";
 
 $appID = "&appid=775158c1c823e0fc9aa77299bc16461c";
@@ -109,16 +109,21 @@ $resultsDark = json_decode($returnDark, true);
 //var_dump($resultsDark);
 curl_close($process);
 
-$city3 = $_GET['city'];
-//$city2 = "galway";
+//$city3 = $_GET['city'];
+$city3 = "galway";
 $temperature3 = round(($resultsDark[currently][temperature] - 32) / 1.8, 0);
 
 // getting data from php object
 $condition3 = $resultsDark[hourly][summary];
 $humidity3 = ($resultsDark[currently][humidity]) * 100 . "%";
-$wind3 = round(($resultsDark[currently][windSpeed] * 3.6), 0); // round the number
+//$wind3 = round(($resultsDark[currently][windSpeed] * 3.6), 0); // round the number
+$wind3 = round(($resultsDark[currently][windSpeed])* 0.44704, 1); // round the number
+
 $direction3 = $resultsDark[currently][windBearing];
 $icon = $resultsDark[hourly][icon];
+$daily = "test output";
+$daily = $resultsDark[daily][summary];
+
 
 //$icon = "clear-day";
 
@@ -130,12 +135,14 @@ curl_close($processDark);
  */
 function imageIcon($icon): string
 {
+    $first = "<img src=\"img/svg/";
+    $second = "alt=\"Mountain view\"/>";
     switch ($icon) {
         case "rain":
-            $image = "<img src=\"img/svg/rainy-6.svg\"  alt=\"Mountain View\"  ";
+            $image = $first . "rainy-6.svg\".$second";
             break;
         case "clear-day":
-            $image = "<img src=\"img/svg/day.svg\" alt=\"Mountain View\" ";
+            $image = $first . 'day.svg"' . $second;
             break;
         case "clear-night":
             $image = "<img class=\"img-responsive \"  src=\"img/clear_night.png\" alt=\"Mountain View\" ";
@@ -156,8 +163,8 @@ function imageIcon($icon): string
             $image = "<img class=\"img-responsive \"  src=\"img/hail.png\" alt=\"Mountain View\" ";
             break;
         case "partly-cloudy-day":
-            $image = "<img src=\"img/svg/cloudy-day-3.svg\" alt=\"Mountain View\" ";
-            break;
+            $image = $first . 'cloudy-day-3.svg"' . $second;
+           break;
         case "partly-cloudy-night":
             $image = "<img src=\"img/svg/cloudy-night-1.svg\" alt=\"Mountain View\" ";
             break;
@@ -178,8 +185,10 @@ function imageIcon($icon): string
 }
 
 $image = imageIcon($icon);
-//echo "</br>lat: ".$lat. " lon: ". $long;
-require 'curl.view.php';
-?>
+echo "</br>lat: ".$lat. " lon: ". $long;
+//require 'curl.view.php';
+//require 'weatherapp.php';
+require  'wea3.php';
+
 
 
