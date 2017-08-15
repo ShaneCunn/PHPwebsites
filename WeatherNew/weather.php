@@ -7,9 +7,9 @@
  */
 
 // Report all errors
-error_reporting(E_ALL);
+//error_reporting(E_ALL);
 
-
+// call the
 require 'WeatherModel.php';
 
 
@@ -44,7 +44,7 @@ require 'WeatherModel.php';
 <div class="container-fluid">
     <div class="row row-centered">
         <div class="col-md-12">
-            <h1>Basic Weather App</h1>
+            <h1>PHP Weather App</h1>
             <h3 class="text-center">
                 <?php echo ucfirst($city); ?>
             </h3>
@@ -108,14 +108,14 @@ require 'WeatherModel.php';
         </div>
     </div>
 
-    <div class="col-lg-12 text-center ">Made with <i class="fa fa-heart"></i> by <a href="https://www.linkedin.com/in/cunninghamshane/" target="_blank">@ShaneC</a></div>
+    <div class="col-lg-12 text-center ">Made with <i class="fa fa-heart"></i> by <a
+                href="https://www.linkedin.com/in/cunninghamshane/" target="_blank">@ShaneC</a></div>
 
 
 </div>
 
 
 <script language="JavaScript">
-    // $("[name='my-checkbox']").bootstrapSwitch();
 
     var tempc = '<?php echo round($temperature) . "°C"?>';
     var tempf = '<?php echo round($temperature * 9 / 5 + 32) . "°F";?>';
