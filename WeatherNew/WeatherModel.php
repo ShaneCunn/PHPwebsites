@@ -13,7 +13,6 @@ $humidity = '0.56';
 $wind = '45';
 $city = "galway";
 $temperature = 300;
-$Test = 'bob';
 /**
  * @param $city
  * @return array
@@ -52,6 +51,9 @@ $ip = GetRemoteIP();
 
 function GetCity($ip): array
 {
+
+//     pass the IP address of the remote request to ip API
+//     which pass back the city and lat and long co-ordinates
     $IPLoc = $ip;
     $api_url_Loc = "https://ipapi.co/$IPLoc/json/";
     $processLoc = curl_init($api_url_Loc);
@@ -61,33 +63,33 @@ function GetCity($ip): array
     $resultLoc = json_decode($returnLoc, true);
 
 //  var_dump($resultLoc);
-    $city = $resultLoc['city'];
+    $city = $resultLoc['city']; // get the city name from the array
 
-    $lat = $resultLoc['latitude'];
-    $long = $resultLoc['longitude'];
-
-
-    curl_close($processLoc);
+    $lat = $resultLoc['latitude']; // get the latitude from array
+    $long = $resultLoc['longitude']; // gets the longitude from the array
+    curl_close($processLoc); // closes the curl process
     return array($city, $lat, $long);
 }
 
 list($city, $lat, $long) = GetCity($ip);
 
 
-// Darkskies api feed
-$appDarksky = "2457a1a06421272ba3217d68bf4f47fa";
+// Darkskies API Section
+
+// Darkskies api Key
+$appID = "2457a1a06421272ba3217d68bf4f47fa"; // sets the api key
 
 //$lat = "53.2707";
 //$long = "-9.0568";
 //$api_url = "http://api.openweathermap.org/data/2.5/weather?q=" . $city . "," . $country . $appID;
-$api_urlDark = "https://api.darksky.net/forecast/" . $appDarksky . "/" . $lat . "," . $long;
+$api_URL = "https://api.darksky.net/forecast/" . $appID . "/" . $lat . "," . $long;
 /**
- * @param $api_urlDark
+ * @param $api_URL
  * @return array
  */
-function GetAPI($api_urlDark): array
+function GetAPI($api_URL): array
 {
-    $processDark = curl_init($api_urlDark);
+    $processDark = curl_init($api_URL); // open the curl process and calls the
     curl_setopt($processDark, CURLOPT_USERAGENT, 1);
     curl_setopt($processDark, CURLOPT_RETURNTRANSFER, 1);
     $returnDark = curl_exec($processDark);
@@ -95,26 +97,26 @@ function GetAPI($api_urlDark): array
     return array($processDark, $resultsDark);
 }
 
-list($processDark, $resultsDark) = GetAPI($api_urlDark);
+list($processDark, $resultsDark) = GetAPI($api_URL);
 //var_dump($resultsDark);
 curl_close($processDark);
 
 
-// getting data from php object
+// Getting data from php object
 $temperature = round(($resultsDark['currently']['temperature'] - 32 / 1.8), 0);
 $condition = $resultsDark['hourly']['summary'];
 $humidity = ($resultsDark['currently']['humidity']) * 100 . "%";
 $wind = round(($resultsDark['currently']['windSpeed']), 1); // round the number
 $direction = $resultsDark['currently']['windBearing'];
-$icon = $resultsDark['hourly']['icon'];
 $daily = $resultsDark['daily']['summary'];
 $hourly = $resultsDark['hourly']['summary'];
 
 
+$icon = $resultsDark['hourly']['icon'];
+//  Get icon data from array and pass it to the function and it returns a icon image
 function imageIcon($icon): string
 {
-    $first = "<img src=\"img/svg/";
-    $second = "Width=\"100px\"//>";
+
     switch ($icon) {
         case "rain":
             $image = "rainy-6.svg";
@@ -163,4 +165,4 @@ function imageIcon($icon): string
     // or partly-cloudy-night.  hail, thunderstorm, tornado,
 }
 
-$image = imageIcon($icon);
+$image = imageIcon($icon); // calls the imageicon function
