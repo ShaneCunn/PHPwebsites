@@ -7,6 +7,7 @@
  * Time: 11:23
  */
 
+
 //$image = 'weather.svg';
 $image = null;
 $humidity = '0.56';
@@ -17,7 +18,6 @@ $temperature = 300;
  * @param $city
  * @return array
  */
-
 
 /* Location section
  localhost ip address not for website
@@ -116,7 +116,6 @@ $icon = $resultsDark['hourly']['icon'];
 //  Get icon data from array and pass it to the function and it returns a icon image
 function imageIcon($icon): string
 {
-
     switch ($icon) {
         case "rain":
             $image = "rainy-6.svg";
