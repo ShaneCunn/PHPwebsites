@@ -103,7 +103,7 @@ curl_close($processDark);
 
 
 // Getting data from php object
-$temperature = round(($resultsDark['currently']['temperature'] - 32 / 1.8), 0);
+$temperature = round(($resultsDark['currently']['temperature'] - 32) / 1.8, 0);
 $condition = $resultsDark['hourly']['summary'];
 $humidity = ($resultsDark['currently']['humidity']) * 100 . "%";
 $wind = round(($resultsDark['currently']['windSpeed']), 1); // round the number

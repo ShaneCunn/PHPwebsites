@@ -10,7 +10,7 @@
 //error_reporting(E_ALL);
 
 // call the
-require 'WeatherModel.php';
+include 'WeatherModel.php';
 
 
 ?>
