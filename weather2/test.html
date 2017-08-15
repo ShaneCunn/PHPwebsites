@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+
+</head>
+<body>
+
+<input type="checkbox" id="isAgeSelected"/>
+<div id="txtAge" style="display:none">Age is something</div>
+<h1>test heading</h1>
+<input type="checkbox" id="a1"/>
+<input type="checkbox" id="a2" />
+<input type="checkbox" id="a3" />
+<span class="price"></span>
+<script  language="JavaScript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+
+    $('#a1 ,#a2 , #a3').on('click' , function(){
+        var $a1Check  = $('#a1').is(':checked');
+        var $a2Check  = $('#a2').is(':checked');
+        var $a3Check  = $('#a3').is(':checked');
+        var text = '' ;
+        if( $a1Check && $a2Check && $a3Check){
+            text = 'priceNormal';
+        }
+        else if($a1Check && $a2Check){
+            text = 'priceDown';
+        }
+        else if($a1Check)  {
+            text = 'priceUp';
+        }
+
+        $('.price').html(text);
+    });
+
+    $('#isAgeSelected').click(function() {
+        $("#txtAge").toggle(this.checked);
+    });
+</script>
+
+
+</body>
+
+</html>
