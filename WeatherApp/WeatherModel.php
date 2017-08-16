@@ -75,7 +75,7 @@ function GetCity($ip): array
 
 list($city, $lat, $long, $country) = GetCity($ip);
 
-echo $country;
+//echo $country;
 // Darkskies API Section
 
 // Darkskies api Key
@@ -113,7 +113,7 @@ $direction = $resultsDark['currently']['windBearing'];
 $daily = $resultsDark['daily']['summary'];
 $hourly = $resultsDark['hourly']['summary'];
 $airPressure = $resultsDark['currently']['pressure'];
-echo $airPressure . "pressure is";
+//echo $airPressure . "pressure is";
 
 
 $icon = $resultsDark['hourly']['icon'];
@@ -208,7 +208,7 @@ foreach ($resultsDark['daily']['data'] as $d) {
     $dailyCond[] = $d;
 }
 
-echo "Testout " . $dailyCond;
+//echo "Testout " . $dailyCond;
 
 //echo "Daily". $dailySummary;
 
@@ -218,7 +218,7 @@ foreach ($dailyCond as $cond) {
     $wTempLow = round($cond['temperatureMin']);
     $wTime = $cond['time'];
     $wIcon = $cond['icon'];
-    echo date("l, M jS", $wTime)." high is: " . $wTempHigh . " low is: " . $wTempLow ." icon is ".$wIcon. "<br>";
+   // echo date("l, M jS", $wTime)." high is: " . $wTempHigh . " low is: " . $wTempLow ." icon is ".$wIcon. "<br>";
 
 }
 

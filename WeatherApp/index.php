@@ -12,16 +12,15 @@ include 'WeatherModel.php';
 //$city = "galway";
 
 //echo "Test".ucfirst($city);
-$country_name = "dub";
-echo "Test" . ucfirst($country_name) . $direction;
-
+//$country_name = "dub";
+//echo "Test" . ucfirst($country_name) . $direction;
+//echo "icon is: " . $icon;
 
 ?>
 
 
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 
 <!-- Head -->
 <head>
@@ -36,6 +35,7 @@ echo "Test" . ucfirst($country_name) . $direction;
     <script type="application/x-javascript"> addEventListener("load", function () {
             setTimeout(hideURLbar, 0);
         }, false);
+
         function hideURLbar() {
             window.scrollTo(0, 1);
         } </script>
@@ -45,7 +45,7 @@ echo "Test" . ucfirst($country_name) . $direction;
     <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
     <!-- Owl-Carousel-CSS -->
     <link rel="stylesheet" href="css/owl.carousel.css" type="text/css" media="all">
-    <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+    <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico'/>
     <!-- Fonts -->
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" type="text/css" media="all">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900"
@@ -109,12 +109,12 @@ echo "Test" . ucfirst($country_name) . $direction;
                 </div>
                 <div class="w3temperatureaits-grid w3tempimg">
                     <figure class="icons agileits w3layouts">
-                        <canvas id="<?php echo $icon ?>" width="70" class="w3-agileits" height="70"></canvas>
+                        <canvas class="<?php echo $icon ?>" width="70" class="w3-agileits" height="70"></canvas>
                     </figure>
                 </div>
                 <div class="w3temperatureaits-grid w3-agile wthreestats">
                     <ul>
-                        <li class="agiletemp agiletemppressure"><?php  echo round($airPressure); ?> mBar</li>
+                        <li class="agiletemp agiletemppressure"><?php echo round($airPressure); ?> mBar</li>
                         <li class="agiletemp wthree agiletemphumidity w3-agile"><?php echo $humidity; ?> Humidity</li>
                         <li class="agiletemp agileits-w3layouts agileinfo agiletempwind"><?php echo $wind . " Mph " . $direction; ?></li>
                         </li>
@@ -125,74 +125,88 @@ echo "Test" . ucfirst($country_name) . $direction;
 
             <div id="owl-demo" class="owl-carousel agileits text-center">
                 <?php
-                echo '<div class="item w3threeitem w3threeitem1">
-                    <h4>SUN</h4>
-                    <figure class="icons agileits-w3layouts agileits w3layouts">
-                        <canvas id="wind" width="50" height="50"></canvas>
+                $count = 1;
+                foreach ($dailyCond as $cond) {
+                    //    if ($count == 0) continue;
+                    $var1 = "-w3layouts";
+                    if ($count == 0) $var1 = "-w3layouts";
+                    else  $var1 = "";
+                    $wTempHigh = round(($cond['temperatureMax'] - 32) / 1.8, 0);
+                    $wTempLow = round(($cond['temperatureMin'] - 32) / 1.8, 0);
+                    $wTime = $cond['time'];
+                    $wIcon = $cond['icon'];
+                    echo '<div class="item w3threeitem w3threeitem' . $count . '">
+                    <h4>' . date("l", $wTime) . '</h4>
+                    <figure class="icons agileits w3layouts">
+                        <canvas class="' . $wIcon . '" width="50" height="50"></canvas>
                     </figure>
-                    <h5>18°C</h5>
-                    <h6>12°C</h6>';
+                    <h5>' . $wTempHigh . '°C</h5>
+                    <h6>' . $wTempLow . '°C</h6></div>';
+                    $count++;
 
+                }
 
                 ?>
-             <!--   <div class="item w3threeitem w3threeitem1">
-                    <h4>SUN</h4>
-                    <figure class="icons agileits-w3layouts agileits w3layouts">
-                        <canvas id="wind" width="50" height="50"></canvas>
-                    </figure>
-                    <h5>18°C</h5>
-                    <h6>12°C</h6>
-                </div>
 
 
-                <div class="item w3threeitem agileinfo w3threeitem2">
-                    <h4>MON</h4>
-                    <figure class="icons wthree agileits w3layouts">
-                        <canvas id="sleet" width="50" class="w3ls" height="50"></canvas>
-                    </figure>
-                    <h5>17°C</h5>
-                    <h6>12°C</h6>
-                </div>
-                <div class="item w3 w3threeitem w3threeitem3">
-                    <h4>TUE</h4>
-                    <figure class="icons agileits w3layouts">
-                        <canvas id="rain" width="50" height="50"></canvas>
-                    </figure>
-                    <h5>17°C</h5>
-                    <h6>10°C</h6>
-                </div>
-                <div class="item w3threeitem w3threeitem4">
-                    <h4>WED</h4>
-                    <figure class="icons agileits w3layouts">
-                        <canvas id="fog" width="50" class="w3ls" height="50"></canvas>
-                    </figure>
-                    <h5>17°C</h5>
-                    <h6>10°C</h6>
-                </div>
-                <div class="item w3threeitem wthree agileinfo w3threeitem5">
-                    <h4>THU</h4>
-                    <figure class="icons agileits w3layouts">
-                        <canvas id="partly-cloudy-day" width="50" height="50"></canvas>
-                    </figure>
-                    <h5>17°C</h5>
-                    <h6>10°C</h6>
-                </div>
-                <div class="item w3 w3threeitem w3threeitem6">
-                    <h4>FRI</h4>
-                    <figure class="icons agileits w3layouts">
-                        <canvas id="snow" width="50" height="50"></canvas>
-                    </figure>
-                    <h5>12°C</h5>
-                    <h6>10°C</h6>
-                </div>
-                <div class="item w3l w3threeitem w3threeitem7">
-                    <h4>SAT</h4>
-                    <figure class="icons agileits w3layouts">
-                        <canvas id="cloudy" class="agileits-w3layouts" width="50" height="50"></canvas>
-                    </figure>
-                    <h5>20°C</h5>
-                    <h6>15°C</h6>
-                </div>-->
+                <!--   <div class="item w3threeitem w3threeitem1">
+                       <h4>SUN</h4>
+                       <figure class="icons agileits-w3layouts agileits w3layouts">
+                           <canvas id="wind" width="50" height="50"></canvas>
+                       </figure>
+                       <h5>18°C</h5>
+                       <h6>12°C</h6>
+                   </div>
+
+
+                   <div class="item w3threeitem agileinfo w3threeitem2">
+                       <h4>MON</h4>
+                       <figure class="icons wthree agileits w3layouts">
+                           <canvas id="sleet" width="50" class="w3ls" height="50"></canvas>
+                       </figure>
+                       <h5>17°C</h5>
+                       <h6>12°C</h6>
+                   </div>
+                   <div class="item w3 w3threeitem w3threeitem3">
+                       <h4>TUE</h4>
+                       <figure class="icons agileits w3layouts">
+                           <canvas id="rain" width="50" height="50"></canvas>
+                       </figure>
+                       <h5>17°C</h5>
+                       <h6>10°C</h6>
+                   </div>
+                   <div class="item w3threeitem w3threeitem4">
+                       <h4>WED</h4>
+                       <figure class="icons agileits w3layouts">
+                           <canvas id="fog" width="50" class="w3ls" height="50"></canvas>
+                       </figure>
+                       <h5>17°C</h5>
+                       <h6>10°C</h6>
+                   </div>
+                   <div class="item w3threeitem wthree agileinfo w3threeitem5">
+                       <h4>THU</h4>
+                       <figure class="icons agileits w3layouts">
+                           <canvas id="partly-cloudy-day" width="50" height="50"></canvas>
+                       </figure>
+                       <h5>17°C</h5>
+                       <h6>10°C</h6>
+                   </div>
+                   <div class="item w3 w3threeitem w3threeitem6">
+                       <h4>FRI</h4>
+                       <figure class="icons agileits w3layouts">
+                           <canvas id="snow" width="50" height="50"></canvas>
+                       </figure>
+                       <h5>12°C</h5>
+                       <h6>10°C</h6>
+                   </div>
+                   <div class="item w3l w3threeitem w3threeitem7">
+                       <h4>SAT</h4>
+                       <figure class="icons agileits w3layouts">
+                           <canvas id="cloudy" class="agileits-w3layouts" width="50" height="50"></canvas>
+                       </figure>
+                       <h5>20°C</h5>
+                       <h6>15°C</h6>
+                   </div>-->
             </div>
 
         </div>
@@ -233,6 +247,7 @@ echo "Test" . ucfirst($country_name) . $direction;
         document.getElementById('txt').innerHTML = h + ":" + m + ":" + s;
         var t = setTimeout(startTime, 500);
     }
+
     function checkTime(i) {
         if (i < 10) {
             i = "0" + i
@@ -251,8 +266,14 @@ echo "Test" . ucfirst($country_name) . $direction;
             "clear-day"
         ],
         i;
-    for (i = list.length; i--;)
-        icons.set(list[i], list[i]);
+    for (i = list.length; i--;) {
+        var weatherType = list[i],
+            elements = document.getElementsByClassName(weatherType);
+        console.log(elements);
+        for (e = elements.length; e--;) {
+            icons.set(elements[e], weatherType);
+        }
+    }
     icons.play();
 </script>
 <script>
@@ -261,8 +282,14 @@ echo "Test" . ucfirst($country_name) . $direction;
             "clear-night", "partly-cloudy-day", "partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind", "fog"
         ],
         j;
-    for (j = list.length; j--;)
-        icons.set(list[j], list[j]);
+    for (j = list.length; j--;) {
+        var weatherType = list[j],
+            elements = document.getElementsByClassName(weatherType);
+        console.log(elements);
+        for (e = elements.length; e--;) {
+            icons.set(elements[e], weatherType);
+        }
+    }
     icons.play();
 </script>
 <!--//Weather-Widget-JavaScript -->
