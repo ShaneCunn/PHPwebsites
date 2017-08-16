@@ -13,7 +13,7 @@ include 'WeatherModel.php';
 
 //echo "Test".ucfirst($city);
 $country_name = "dub";
-echo "Test" . ucfirst($country_name);
+echo "Test" . ucfirst($country_name) . $direction;
 
 
 ?>
@@ -45,7 +45,7 @@ echo "Test" . ucfirst($country_name);
     <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
     <!-- Owl-Carousel-CSS -->
     <link rel="stylesheet" href="css/owl.carousel.css" type="text/css" media="all">
-
+    <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
     <!-- Fonts -->
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" type="text/css" media="all">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900"
@@ -105,25 +105,37 @@ echo "Test" . ucfirst($country_name);
 
             <div class="w3temperatureaits agileits w3-agileits">
                 <div class="w3temperatureaits-grid w3-agileits wthreetemp">
-                    <p><?php echo $temperature;?>° C</p>
+                    <p><?php echo $temperature; ?>° C</p>
                 </div>
                 <div class="w3temperatureaits-grid w3tempimg">
                     <figure class="icons agileits w3layouts">
-                        <canvas id="<?php echo $icon?>" width="70" class="w3-agileits" height="70"></canvas>
+                        <canvas id="<?php echo $icon ?>" width="70" class="w3-agileits" height="70"></canvas>
                     </figure>
                 </div>
                 <div class="w3temperatureaits-grid w3-agile wthreestats">
                     <ul>
-                        <li class="agiletemp agiletemppressure">710 mm Hg</li>
-                        <li class="agiletemp wthree agiletemphumidity w3-agile">40% Humidity</li>
-                        <li class="agiletemp agileits-w3layouts agileinfo agiletempwind">4m/s NE</li>
+                        <li class="agiletemp agiletemppressure"><?php  echo round($airPressure); ?> mBar</li>
+                        <li class="agiletemp wthree agiletemphumidity w3-agile"><?php echo $humidity; ?> Humidity</li>
+                        <li class="agiletemp agileits-w3layouts agileinfo agiletempwind"><?php echo $wind . " Mph " . $direction; ?></li>
+                        </li>
                     </ul>
                 </div>
                 <div class="clear"></div>
             </div>
 
             <div id="owl-demo" class="owl-carousel agileits text-center">
-                <div class="item w3threeitem w3threeitem1">
+                <?php
+                echo '<div class="item w3threeitem w3threeitem1">
+                    <h4>SUN</h4>
+                    <figure class="icons agileits-w3layouts agileits w3layouts">
+                        <canvas id="wind" width="50" height="50"></canvas>
+                    </figure>
+                    <h5>18°C</h5>
+                    <h6>12°C</h6>';
+
+
+                ?>
+             <!--   <div class="item w3threeitem w3threeitem1">
                     <h4>SUN</h4>
                     <figure class="icons agileits-w3layouts agileits w3layouts">
                         <canvas id="wind" width="50" height="50"></canvas>
@@ -131,6 +143,8 @@ echo "Test" . ucfirst($country_name);
                     <h5>18°C</h5>
                     <h6>12°C</h6>
                 </div>
+
+
                 <div class="item w3threeitem agileinfo w3threeitem2">
                     <h4>MON</h4>
                     <figure class="icons wthree agileits w3layouts">
@@ -178,7 +192,7 @@ echo "Test" . ucfirst($country_name);
                     </figure>
                     <h5>20°C</h5>
                     <h6>15°C</h6>
-                </div>
+                </div>-->
             </div>
 
         </div>

@@ -112,6 +112,8 @@ $wind = round(($resultsDark['currently']['windSpeed']), 1); // round the number
 $direction = $resultsDark['currently']['windBearing'];
 $daily = $resultsDark['daily']['summary'];
 $hourly = $resultsDark['hourly']['summary'];
+$airPressure = $resultsDark['currently']['pressure'];
+echo $airPressure . "pressure is";
 
 
 $icon = $resultsDark['hourly']['icon'];
@@ -167,3 +169,56 @@ function imageIcon($icon): string
 }
 
 $image = imageIcon($icon); // calls the imageicon function
+
+$bearing = $direction;
+
+/**
+ * @param $bearing
+ * @return int|string
+ */
+function degreeToString($bearing)
+{
+    $cardinalDirections = array(
+        'N' => array(337.5, 22.5),
+        'NE' => array(22.5, 67.5),
+        'E' => array(67.5, 112.5),
+        'SE' => array(112.5, 157.5),
+        'S' => array(157.5, 202.5),
+        'SW' => array(202.5, 247.5),
+        'W' => array(247.5, 292.5),
+        'NW' => array(292.5, 337.5)
+    );
+// for statement to convert degree to wind direction eg west
+    foreach ($cardinalDirections as $dir => $angles) { // convert degrees into wind direction
+        if ($bearing >= $angles[0] && $bearing < $angles[1]) {
+            $direction = $dir;
+            break;
+        }
+    }
+    return $direction;
+}
+
+$direction = degreeToString($bearing);
+
+//Daily Forecast
+$dailySummary = $resultsDark['daily']['summary'];
+$dailyIcon = $resultsDark['daily']['icon'];
+$dailyCond = array();
+foreach ($resultsDark['daily']['data'] as $d) {
+    $dailyCond[] = $d;
+}
+
+echo "Testout " . $dailyCond;
+
+//echo "Daily". $dailySummary;
+
+foreach ($dailyCond as $cond) {
+
+    $wTempHigh = round($cond['temperatureMax']);
+    $wTempLow = round($cond['temperatureMin']);
+    $wTime = $cond['time'];
+    $wIcon = $cond['icon'];
+    echo date("l, M jS", $wTime)." high is: " . $wTempHigh . " low is: " . $wTempLow ." icon is ".$wIcon. "<br>";
+
+}
+

@@ -207,9 +207,9 @@ function imageIcon($icon): string
 
 $image = imageIcon($icon);
 echo "</br>lat: " . $lat . " lon: " . $long;
-//require 'curl.view.php';
+require 'curl.view.php';
 //require 'weatherapp.php';
-require 'wea3.php';
+//require 'wea3.php';
 
 
 
