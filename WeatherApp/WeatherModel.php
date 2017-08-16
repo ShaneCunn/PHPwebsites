@@ -67,15 +67,15 @@ function GetCity($ip): array
 
     $lat = $resultLoc['latitude']; // get the latitude from array
     $long = $resultLoc['longitude']; // gets the longitude from the array
+    $country = $resultLoc['country']; // gets the longitude from the array
+
     curl_close($processLoc); // closes the curl process
-    return array($city, $lat, $long);
+    return array($city, $lat, $long, $country);
 }
 
-list($city, $lat, $long) = GetCity($ip);
+list($city, $lat, $long, $country) = GetCity($ip);
 
-
-
-
+echo $country;
 // Darkskies API Section
 
 // Darkskies api Key
