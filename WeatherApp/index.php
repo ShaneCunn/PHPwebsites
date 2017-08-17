@@ -126,16 +126,22 @@ include 'WeatherModel.php';
             <div id="owl-demo" class="owl-carousel agileits text-center">
                 <?php
                 $count = 1;
+                array_shift($dailyCond); // removes the first element from the array
                 foreach ($dailyCond as $cond) {
-                    //    if ($count == 0) continue;
-                    $var1 = "-w3layouts";
-                    if ($count == 0) $var1 = "-w3layouts";
-                    else  $var1 = "";
+                    if ($count < 1) {
+                        continue;
+                    }
+                    //  $var1 = " agileinfo ";
+                    if ($count == 1) {
+                        $var1 = " agileinfo ";
+                    } else {
+                        $var1 = "";
+                    }
                     $wTempHigh = round(($cond['temperatureMax'] - 32) / 1.8, 0);
                     $wTempLow = round(($cond['temperatureMin'] - 32) / 1.8, 0);
                     $wTime = $cond['time'];
                     $wIcon = $cond['icon'];
-                    echo '<div class="item w3threeitem w3threeitem' . $count . '">
+                    echo '<div class="item w3threeitem ' . $var1 . ' w3threeitem' . $count . '">
                     <h4>' . date("l", $wTime) . '</h4>
                     <figure class="icons agileits w3layouts">
                         <canvas class="' . $wIcon . '" width="50" height="50"></canvas>
