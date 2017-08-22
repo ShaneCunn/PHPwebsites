@@ -1,0 +1,54 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "3ef34e7781e2ae93201a72e989d5e4f9",
+    "packages": [
+        {
+            "name": "vertigolabs/overcast",
+            "version": "1.1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jaimz22/Overcast.git",
+                "reference": "8ef834585729a06f0b458321562669143407daed"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jaimz22/Overcast/zipball/8ef834585729a06f0b458321562669143407daed",
+                "reference": "8ef834585729a06f0b458321562669143407daed",
+                "shasum": ""
+            },
+            "suggest": {
+                "guzzlehttp/guzzle": "Allows for better handling of http connections to Dark Sky webservice"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "VertigoLabs\\Overcast\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "James Murray",
+                    "email": "jaimz@vertigolabs.org"
+                }
+            ],
+            "description": "An easy to use wrapper for the Dark Sky API (formerly Forecast.io)",
+            "time": "2017-02-22T21:35:25+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}
