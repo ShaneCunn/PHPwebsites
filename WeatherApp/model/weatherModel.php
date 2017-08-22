@@ -111,61 +111,7 @@ $hourly = $resultsDark['hourly']['summary'];
 $airPressure = $resultsDark['currently']['pressure'];
 
 
-$icon = $resultsDark['hourly']['icon'];
-//  Get icon data from array and pass it to the function and it returns a icon image
-function imageIcon($icon): string
-{
-    switch ($icon) {
-        case "rain":
-            $image = "rainy-6.svg";
-            break;
-        case "clear-day":
-            $image = 'day.svg';
-            break;
-        case "clear-night":
-            $image = "clear_night,svg";
-            break;
-        case "snow":
-            $image = "snow-1.svg";
-            break;
-        case "sleet":
-            $image = "sleet.png";
-            break;
-        case "wind":
-            $image = "wind.png";
-            break;
-        case "cloudy":
-            $image = "cloudy.png";
-            break;
-        case "hail":
-            $image = "hail.png";
-            break;
-        case "partly-cloudy-day":
-            $image = 'cloudy-day-3.svg"';
-            break;
-        case "partly-cloudy-night":
-            $image = "cloudy-night-1.svg";
-            break;
-        case "thunderstorm":
-            $image = "thunder.svg";
-            break;
-        case "tornado":
-            $image = "rain-cloud-icon-5.png";
-            break;
-        case "sunny":
-            $image = "day.svg";
-            break;
-        default:
-            $image = "weather.svg";
-    }
-    return $image;
 
-    // list of available icons
-    //clear-day, clear-night, rain, snow, sleet, wind, fog, cloudy, partly-cloudy-day,
-    // or partly-cloudy-night.  hail, thunderstorm, tornado,
-}
-
-$image = imageIcon($icon); // calls the imageicon function
 
 $bearing = $direction; // set the wind direction variable to bearing variable
 
