@@ -109,7 +109,7 @@ $direction = $resultsDark['currently']['windBearing'];
 $daily = $resultsDark['daily']['summary'];
 $hourly = $resultsDark['hourly']['summary'];
 $airPressure = $resultsDark['currently']['pressure'];
-
+$icon = $resultsDark['currently']['icon'];
 
 
 
