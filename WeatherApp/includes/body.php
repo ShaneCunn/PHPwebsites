@@ -13,11 +13,13 @@
         <div class="place agileits w3layouts">
 
             <div class="city agileits-w3layouts agileits w3layouts">
+             <!-- Calls the City variable and echo it to screen-->
                 <p> <?php echo ucfirst($city) . ", " . ($country); ?></p>
             </div>
 
             <div class="dmy agileits w3-agile w3layouts">
                 <script type="text/javascript">
+                // gets the date and time of current location
                     var mydate = new Date()
                     var year = mydate.getYear()
                     if (year < 1000)
@@ -37,15 +39,18 @@
 
             <div class="w3temperatureaits agileits w3-agileits">
                 <div class="w3temperatureaits-grid w3-agileits wthreetemp">
+                <!--  calls the temperature variable and echo out to screen -->
                     <p><?php echo $temperature; ?>° C</p>
                 </div>
                 <div class="w3temperatureaits-grid w3tempimg">
                     <figure class="icons agileits w3layouts">
+                     <!-- calls the icons variable and echo out to screen -->
                         <canvas class="<?php echo $icon ?>" width="70" class="w3-agileits" height="70"></canvas>
                     </figure>
                 </div>
                 <div class="w3temperatureaits-grid w3-agile wthreestats">
                     <ul>
+                     <!--  calls the air pressure, humidity and wind variables and echo it out to screen-->
                         <li class="agiletemp agiletemppressure"><?php echo round($airPressure); ?> mBar</li>
                         <li class="agiletemp wthree agiletemphumidity w3-agile"><?php echo $humidity; ?> Humidity</li>
                         <li class="agiletemp agileits-w3layouts agileinfo agiletempwind"><?php echo $wind . " Mph " . $direction; ?></li>
@@ -58,7 +63,7 @@
             <div id="owl-demo" class="owl-carousel agileits text-center">
                 <?php
                 $count = 1;
-                array_shift($dailyCond); // removes the first element from the array
+                array_shift($dailyCond); // removes the first element from the array, as the data contains the weather from yesterday
                 foreach ($dailyCond as $cond) {
                     if ($count == 1) {
                         $var1 = " agileinfo "; // change value of the first day to a different css property
@@ -66,9 +71,9 @@
                         $var1 = ""; // change it back to nothing for the rest of the for loops
                     }
                     $wTempHigh = round(($cond['temperatureMax'] - 32) / 1.8, 0); // sets the variable and convert temperature from fahrenheit
-                    $wTempLow = round(($cond['temperatureMin'] - 32) / 1.8, 0);
-                    $wTime = $cond['time'];
-                    $wIcon = $cond['icon'];
+                    $wTempLow = round(($cond['temperatureMin'] - 32) / 1.8, 0); // sets the variable and convert temperature from fahrenheit
+                    $wTime = $cond['time']; // sets the time  ie day of week
+                    $wIcon = $cond['icon']; // sets the weather icon 
                     echo '<div class="item w3threeitem ' . $var1 . ' w3threeitem' . $count . '">
                     <h4>' . date("l", $wTime) . '</h4>
                     <figure class="icons agileits w3layouts">
