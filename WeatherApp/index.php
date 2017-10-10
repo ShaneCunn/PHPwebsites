@@ -5,7 +5,6 @@
  * Date: 16/08/2017
  * Time: 08:39
  */
-
 $city = null;
 $temperature = null;
 $icon = null;
@@ -15,7 +14,7 @@ $direction = null;
 $city = null;
 
 
-include 'model/weatherModel.php';
+require 'model/weatherModel.php';
 
 
 ?>

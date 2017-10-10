@@ -12,6 +12,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-social.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="css/2-col-portfolio.css" rel="stylesheet">
@@ -60,19 +61,22 @@
     <div class="row">
         <div class="col-lg-6 portfolio-item">
             <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="images/project1.jpg" alt=""></a>
+                <a href="https://projects.shanecunningham.me/weather/WeatherNew/weather.php"><img class="card-img-top" src="images/project1.jpg" alt=""></a>
                 <div class="card-body">
                     <h4 class="card-title">
                         <a href="https://projects.shanecunningham.me/weather/WeatherNew/weather.php" target="_blank">Basic Weather App</a>
                     </h4>
                     <p class="card-text">Simple weather application using php and <a href="https://darksky.net/dev"
                                                                                      target="_blank">Darksky api</a></p>
+                    <a class="btn btn-social-icon btn-twitter">
+                        <span class="fa fa-twitter"></span>
+                    </a>
                 </div>
             </div>
         </div>
         <div class="col-lg-6 portfolio-item">
             <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="images/project2.jpg" alt=""></a>
+                <a href="https://projects.shanecunningham.me/weather/WeatherApp/index.php"><img class="card-img-top" src="images/project2.jpg" alt=""></a>
                 <div class="card-body">
                     <h4 class="card-title">
                         <a href="https://projects.shanecunningham.me/weather/WeatherApp/index.php" target="_blank">Basic Weather Widget</a>
@@ -89,26 +93,35 @@
         </div>
         <div class="col-lg-6 portfolio-item">
             <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                <a href="http://blog.dev/weather/graph"><img class="card-img-top" src="images/graph.jpg" alt=""></a>
                 <div class="card-body">
                     <h4 class="card-title">
-                        <a href="#">Project Three</a>
+                        <a href="http://blog.dev/weather/graph">Graphing Weather Data</a>
                     </h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod
-                        odio, gravida pellentesque urna varius vitae.</p>
+                    <p class="card-text">This project graphs weather data using <a href="https://darksky.net/dev"
+                                                                                   target="_blank">Darksky API</a> and  <a href="https://github.com/ConsoleTVs/Charts"
+                                                                                                                                                target="_blank">Charts Laravel Package</a>.
+                        The main purpose of this project was to learn how to do charts whilst learning <a href="https://laravel.com/"
+                                                                                                          target="_blank">Laravel PHP framework</a></p>
                 </div>
             </div>
         </div>
         <div class="col-lg-6 portfolio-item">
             <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                <a href="https://github.com/ShaneCunn/WeatherForecast/tree/master" target="_blank"><img class="card-img-top" src="images/androidAppSmall.png" alt=""></a>
                 <div class="card-body">
                     <h4 class="card-title">
-                        <a href="#">Project Four</a>
+                        <a href="https://github.com/ShaneCunn/WeatherForecast/tree/master" target="_blank">Weather Android App</a>
                     </h4>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit aliquam aperiam
-                        nulla perferendis dolor nobis numquam, rem expedita, aliquid optio, alias illum eaque. Non
-                        magni, voluptates quae, necessitatibus unde temporibus.</p>
+                    <p class="card-text">Weather forecast data from a free API provided by Darksky.net. The android app then parses the data (in JSON format) and display it in a single-page app. it also can handle errors and situations when the network is unavailable.
+
+                        Features used in this project are:
+
+                        Networking
+                        OkHttp
+                        DarkSky API
+                        Parsing JSON feed
+                        DialogFragment</p>
                 </div>
             </div>
         </div>
@@ -171,7 +184,7 @@
 <!-- Footer -->
 <footer class="py-5 bg-dark">
     <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+        <p class="m-0 text-center text-white">Copyright &copy; Shane Cunningham. All Rights Reserved 2017</p>
     </div>
     <!-- /.container -->
 </footer>
