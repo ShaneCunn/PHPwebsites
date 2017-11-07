@@ -34,6 +34,31 @@
     <!-- //Font-Awesome-File-Links -->
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
     <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <script type="text/javascript">
+        function getlocation() {
+            if (navigator.geolocation) {
+                if(document.getElementById('location').innerHTML == '') {
+                    navigator.geolocation.getCurrentPosition(visitorLocation);
+                }
+            } else {
+                $('#location').html('This browser does not support Geolocation Service.');
+            }
+        }
+        function visitorLocation(position) {
+            var lat = position.coords.latitude;
+            var long = position.coords.longitude;
+            $.ajax({
+                type:'POST',
+                url:'get_location.php',
+                data:'latitude='+lat+'&longitude='+long,
+                success:function(address){
+                    if(address){
+                        $("#location").html(address);
+                    }else{
+                        $("#location").html('Not Available');
+                    }
+                }
+            });}</script>
 
 </head>
 <!-- Head -->

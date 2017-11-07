@@ -15,6 +15,9 @@
             <div class="city agileits-w3layouts agileits w3layouts">
              <!-- Calls the City variable and echo it to screen-->
                 <p> <?php echo ucfirst($city) . ", " . ($country); ?></p>
+                <p>            <?php   echo  "<br>Long is: ". $long;
+                    echo  "<br>LAt is: ". $latPOS; ?>
+                </p>
             </div>
 
             <div class="dmy agileits w3-agile w3layouts">
@@ -85,7 +88,9 @@
 
                 }
 
+
                 ?>
+
 
 
             </div>

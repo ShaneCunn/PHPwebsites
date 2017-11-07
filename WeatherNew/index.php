@@ -2,188 +2,173 @@
 /**
  * Created by PhpStorm.
  * User: shane
- * Date: 01/06/2017
- * Time: 18:19
+ * Date: 01/08/2017
+ * Time: 12:23
  */
 
-if (isset($_GET)) {
+// Report all errors
+//error_reporting(E_ALL);
 
-    $city = $_GET['city'];
-    // $city = "galway";
-    //$country = $_GET['country'];
-    $country = "ireland";
-
-    //http://api.openweathermap.org/data/2.5/weather?q=galway,&appid=775158c1c823e0fc9aa77299bc16461c
-    $appID = "&appid=775158c1c823e0fc9aa77299bc16461c";
-    $api_url = "http://api.openweathermap.org/data/2.5/weather?q=" . $city . "," . $country . $appID;
-    $weather_info = file_get_contents($api_url);
-    $jsonData = json_decode($weather_info, true);
-
-
-    $humidity = $jsonData['main']['humidity'];
-    $condition = $jsonData['weather'][0]['main'];
-    $wind = $jsonData['wind']['speed'] * 3.6;
-    $direction = $jsonData['wind']['deg'];
-
-    // echo "City = ". $city."";
-
-    // echo "condition are: ". $condition;
-}
+// call the
+include 'WeatherModel.php';
 
 
 ?>
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <title>Bootstrap Example</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <style>
-            /* Remove the navbar's default margin-bottom and rounded borders */
-            .navbar {
-                margin-bottom: 0;
-                border-radius: 0;
-            }
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-            /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-            .row.content {
-                height: 450px
-            }
+    <title>Weather App by Shane Cunningham</title>
 
-            /* Set gray background color and 100% height */
-            .sidenav {
-                padding-top: 20px;
-                background-color: #f1f1f1;
-                height: 100%;
-            }
+    <meta name="description" content="Weather app">
+    <meta name="author" content="LayoutIt!">
 
-            /* Set black background color, white text and some padding */
-            footer {
-                background-color: #555;
-                color: white;
-                padding: 15px;
-            }
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!--    <link href="css/style.css" rel="stylesheet">-->
+    <link href="css/titatoggle-dist.css" rel="stylesheet">
+    <link href="css/weather-icons.min.css" rel="stylesheet">
+    <link href="css/weather-icons-wind.min.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
 
-            /* On small screens, set height to 'auto' for sidenav and grid */
-            @media screen and (max-width: 767px) {
-                .sidenav {
-                    height: auto;
-                    padding: 15px;
-                }
 
-                .row.content {
-                    height: auto;
-                }
-            }
-        </style>
-    </head>
-    <body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Logo</a>
-            </div>
-            <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Projects</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+</head>
+<body>
 
-    <div class="container-fluid text-center">
-        <div class="row content">
-            <div class="col-sm-2 sidenav">
-                <p><a href="#">Link</a></p>
-                <p><a href="#">Link</a></p>
-                <p><a href="#">Link</a></p>
-            </div>
-            <div class="col-sm-8 text-left">
-                <h1>Welcome</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et
-                    dolore magna aliqua. </p>
-                <hr>
-                <h3>Test</h3>
+<div class="container-fluid">
+    <div class="row row-centered">
+        <div class="col-md-12">
+            <h1>PHP Weather App</h1>
+            <h3 class="text-center">
+                <?php echo ucfirst($city); ?>
+            </h3>
+            <h3 class="text-center">
 
-                <form>
-                    <div class="form-group">
-                        <label for="City">City:</label>
-                        <input type="text" class="form-control" id="city" name="city" placeholder="City"
-                               value="<?php echo $_GET['city']; ?>">
+
+                <p style="font-size:50px" id="temperatureOutput">test output</p>
+
+            </h3>
+            <h3 class="text-center">
+
+                <img src="img/svg/<?php echo $image; ?>" width="100px">
+
+                <!--                               <img src="img/svg/weather.svg"  width="100px">
+                -->
+            </h3>
+            <h3 class="text-center"><?php echo $hourly; ?></h3>
+
+            <div class="container">
+                <div class="row row-centered">
+                    <div class="col-md-3"></div>
+
+                    <div class="col-md-3 col-max col-centered">
+                        <h3 class="text-center">
+
+                            <i class="wi wi-humidity"></i>
+                            <br><br>
+                            <p><?php echo "Humidity: " . $humidity; ?></p>
+                        </h3>
                     </div>
-                    <div class="form-group">
-                        <label for="pwd">Password:</label>
-                        <input type="password" class="form-control" id="pwd">
+                    <div class="col-md-3 col-max col-centered">
+                        <h3 class="text-center">
+
+                            <i class="wi wi-forecast-io-wind"></i>
+                            <br>
+                            <br>
+                            <!--  <p><?php /*echo "Wind: " . $wind . " m/s"; */ ?></p>-->
+                            <p id="windSpeed">wind output</p>
+                        </h3>
                     </div>
-                    <div class="checkbox">
-                        <label><input type="checkbox"> Remember me</label>
-                    </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </form>
-                <p>Lorem ipsum...</p>
-                <p><?php echo "<Strong>City: </Strong>" . $city . "<br />";
-
-                    echo "<Strong>Condition are:</Strong> " . $condition . "<br />";
-
-                    echo "<Strong>Temperature:</Strong> " . $user_temp . " &#8451;<br />";
-                    echo "<Strong>Humidity:</Strong> " . $humidity . "<br />";
-                    echo "<Strong>Wind Speed:</Strong> " . $wind . " KPH<br />";
-                    echo "<Strong>Wind Direction:</Strong> " . $direction . "&deg;<br />";
-
-
-                    ?></p>
-
-
-            </div>
-            <div class="col-sm-2 sidenav">
-                <div class="well">
-                    <p>ADS</p>
                 </div>
-                <div class="well">
-                    <p>ADS</p>
-                </div>
+            </div>
+            <div class="row row-centered">
+            </div>
+            <div class="col-lg-12 text-center">
+                <h3 class="text-center">
+
+
+                    <span class="testout"></span><br>
+
+
+                    <div class="checkbox checkbox-slider--b-flat checkbox-slider-lg">
+                        <label> <span>  <strong style="margin-right: 28px!important;">Metric</strong></span>
+                            <input id="toggletest" type="checkbox" data-toggle="toggle" onclick="changeTemp() "
+                                   data-style="ios"><span><strong> Imperial</strong></span>
+                        </label>
+                    </div>
+
+
             </div>
         </div>
     </div>
 
-    <footer class="container-fluid text-center">
-        <p>Footer Text</p>
-    </footer>
+    <div class="col-lg-12 text-center ">Made with <i class="fa fa-heart"></i> by <a
+                href="https://www.linkedin.com/in/cunninghamshane/" target="_blank">@ShaneC</a></div>
 
-    </body>
-    </html>
 
-<?php
-//
-//if (isset($jsonData['city'])) {
-//    $jsonData = $jsonData['city'];
-//} elseif ($jsonData == null) {
-//
-//    echo '<div class="alert alert-danger" role="alert">Sorry, Enter a city.</div>';
-//} else if ($jsonData) {
-//
-//    echo '<div class="alert alert-success" role="alert">' . $jsonData . '</div>';
-//
-//} else {
-//
-//    if ($city != "") {
-//
-//        echo '<div class="alert alert-danger" role="alert">Sorry, that city could not be found.</div>';
-//    }
-//}
+</div>
+
+
+<script language="JavaScript">
+
+    var tempc = '<?php echo round($temperature) . "°C"?>';
+    var tempf = '<?php echo round($temperature * 9 / 5 + 32) . "°F";?>';
+    var windMetric = '<?php echo "Wind: " . round($wind * 3.6) . " Kph"?>';
+    var windImperial = '<?php echo "Wind: " . round($wind / 0.44704) . " Mph"?>';
+
+
+    changeTemp = function () {
+        if (!$("#toggletest").parent().hasClass('off')) {
+            console.log('hasclass off = false');
+            $("#temperatureOutput").empty();
+            $("#windSpeed").empty();
+
+            $("#temperatureOutput").append('' + tempc);
+            $("#windSpeed").append('' + windMetric);
+
+            $("#toggletest").parent().addClass('off');
+        }
+        else if ($("#toggletest").parent().hasClass('off')) {
+            console.log('hasclass off = true');
+            $("#temperatureOutput").empty();
+            $("#windSpeed").empty();
+
+            $("#temperatureOutput").append('' + tempf);
+            $("#windSpeed").append('' + windImperial);
+
+            $("#toggletest").parent().removeClass('off');
+        }
+        else {
+            return false;
+        }
+    };
+
+    $("#toggletest").parent().attr('onclick', 'changeTemp();');
+
+
+    $(function () {
+        $('#toggletest').bootstrapToggle({
+            off: '',
+            on: '',
+            onclick: changeTemp()
+        });
+    });
+
+</script>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<!--<script src="js/scripts.js"></script>-->
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-switch.css" rel="stylesheet">
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap-switch.js"></script>
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+</body>
+</html>
