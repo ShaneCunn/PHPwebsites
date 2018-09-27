@@ -5,6 +5,17 @@
  * Date: 16/08/2017
  * Time: 08:39
  */
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+if(!isset($_SESSION))
+{
+    session_start();
+}
+
+//print_r($_SESSION);
+$locationTest ="not Set";
 $city = null;
 $temperature = null;
 $icon = null;

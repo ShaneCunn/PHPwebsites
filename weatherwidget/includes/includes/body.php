@@ -14,7 +14,9 @@
 
             <div class="city agileits-w3layouts agileits w3layouts">
              <!-- Calls the City variable and echo it to screen-->
-                <p> <?php echo ucfirst($city) . ", " . ($country); ?></p>
+
+
+                <p> <?php echo ucfirst($city) . ", " . ($country)."  yy ".  $lat.'    xx '. $long ; ?></p>
 
             </div>
 

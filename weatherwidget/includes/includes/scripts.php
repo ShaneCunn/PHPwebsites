@@ -37,7 +37,7 @@
     for (i = list.length; i--;) {
         var weatherType = list[i],
             elements = document.getElementsByClassName(weatherType);
-       // console.log(elements);
+        console.log(elements);
         for (e = elements.length; e--;) {
             icons.set(elements[e], weatherType);
         }
@@ -53,7 +53,7 @@
     for (j = list.length; j--;) {
         var weatherType = list[j],
             elements = document.getElementsByClassName(weatherType);
-       // console.log(elements);
+        console.log(elements);
         for (e = elements.length; e--;) {
             icons.set(elements[e], weatherType);
         }
